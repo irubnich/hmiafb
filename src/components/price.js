@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CountrySelect from '../components/country_select'
 
 const PriceWrapper = styled.div`
-  margin-top: 40px;
+  margin: 40px 0 40px;
 `
 
 const LastUpdated = styled.div`
@@ -12,7 +12,25 @@ const LastUpdated = styled.div`
   font-size: 10px;
 `
 
+const expletives = [
+  "GODDAMN SON IT'S FUCKING",
+  "HOLY SHIT IT'S FUCKING",
+  "SWEET JESUS IT'S FUCKING",
+  "GET THE FUCK OUT OF HERE IT'S",
+]
+
+const randomExpletive = () => expletives[Math.floor(Math.random() * expletives.length)]
+
 class Price extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      price: 0,
+      lastUpdated: "never",
+      expletive: randomExpletive(),
+    }
+  }
+
   currencySelected(event) {
     console.log(event.target.value)
   }
@@ -20,11 +38,10 @@ class Price extends React.Component {
   render() {
     return (
       <PriceWrapper>
-        <span id="expletive">WAIT...</span>
-        <br />
+        <div>{this.state.expletive}</div>
         <CountrySelect onChange={this.currencySelected} />
-        <span id="the-price"></span>
-        <LastUpdated>Last updated: <span></span></LastUpdated>
+        <span>{this.state.price}</span>
+        <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
       </PriceWrapper>
     )
   }
