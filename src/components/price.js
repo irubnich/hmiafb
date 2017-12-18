@@ -27,7 +27,9 @@ const CLOUD_FUNCTION_URL = "https://us-central1-how-much-is-a-fucking-bitcoin.cl
 class Price extends React.Component {
   constructor() {
     super()
+
     this.state = {
+      currency: "usd",
       price: "HOLD ON",
       lastUpdated: "HAVE SOME DAMN PATIENCE",
       expletive: "WAIT..."
@@ -37,6 +39,9 @@ class Price extends React.Component {
 
     // Start off with USD
     this.updateValue("usd")
+
+    // Polling
+    setInterval(() => this.updateValue(this.state.currency), 30000)
   }
 
   currencyChange(event) {
@@ -52,6 +57,7 @@ class Price extends React.Component {
       const date = new Date().toString()
 
       this.setState({
+        currency: currency,
         price: value,
         lastUpdated: date,
         expletive: randomElement(EXPLETIVES),
