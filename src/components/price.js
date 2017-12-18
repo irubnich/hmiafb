@@ -47,6 +47,12 @@ class Price extends React.Component {
   }
 
   updateValue(currency) {
+    // This function call implies activity so send a GA event to track it
+    // The `if` is necessary to avoid an "undefined" error at build-time
+    if (typeof window !== `undefined`) {
+      ga('send', 'event', 'Home', 'poll');
+    }
+
     axios.get(CLOUD_FUNCTION_URL).then(response => {
       const value = toPrice(parseFloat(response.data.data.rates[currency]))
       const date = new Date().toString()
