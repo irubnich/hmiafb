@@ -36,8 +36,6 @@ class Price extends React.Component {
       expletive: "WAIT..."
     }
 
-    this.currencyChange = this.currencyChange.bind(this)
-
     // Start off with USD
     this.updateValue("USD")
 
@@ -45,9 +43,8 @@ class Price extends React.Component {
     setInterval(() => this.updateValue(this.state.currency), 30000)
   }
 
-  currencyChange(event) {
-    const currency = event.target.value
-    this.updateValue(currency)
+  handleChange(event) {
+    this.updateValue(event.target.value)
   }
 
   updateValue(currency) {
@@ -70,7 +67,7 @@ class Price extends React.Component {
     return (
       <PriceWrapper>
         <div>{this.state.expletive}</div>
-        <CurrencySelect onChange={this.currencyChange} />
+        <CurrencySelect onChange={this.handleChange.bind(this)} />
         <span>{this.state.price}</span>
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
 
