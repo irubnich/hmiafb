@@ -1,13 +1,42 @@
-# gatsby-starter-default
-The default Gatsby starter
+# HOW MUCH IS A FUCKING BITCOIN?
+Wouldn't you like to know.
 
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/)
+This is the repo for [this website.](https://howmuchisafuckingbitcoin.com)
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
+To develop on your machine:
+
+1. Install GatsbyJS:
+
 ```
-gatsby new gatsby-example-site
+npm install --global gatsby-cli
 ```
+
+2. Clone the repo:
+
+```
+git clone git@github.com:irubnich/hmiafb.git
+cd hmiafb
+```
+
+3. Run Gatsby:
+
+```
+gatsby develop
+```
+
+4. Open [localhost:8000]()
+5. Enjoy?
 
 ## Deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+1. Build the site:
+
+```
+gatsby build
+```
+
+2. Deploy the `public` folder to any static host your heart desires
+
+---
+
+Made by [Ilya](https://twitter.com/irubnich)
