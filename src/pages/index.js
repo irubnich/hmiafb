@@ -29,6 +29,7 @@ const Donate = styled.div`
 const IndexPage = () => (
   <Wrapper>
     <Title>WHAT'S THE FUCKING<br />PRICE OF BITCOIN?</Title>
+
     <Price />
 
     <BuyLink>

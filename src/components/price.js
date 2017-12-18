@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 
-import CountrySelect from '../components/country_select'
+import CurrencySelect from '../components/currency_select'
 
 const PriceWrapper = styled.div`
   margin: 40px 0 40px;
@@ -21,6 +22,14 @@ const expletives = [
 
 const randomExpletive = () => expletives[Math.floor(Math.random() * expletives.length)]
 
+const cloudFunctionURL = "https://us-central1-how-much-is-a-fucking-bitcoin.cloudfunctions.net/getExchangeRates"
+
+const toPrice = (price) => {
+  return price.valueOf().toFixed(2).replace(/./g, (c, i, a) => {
+	   return i && c !== "." && !((a.length - i) % 3) ? "," + c : c;
+   })
+}
+
 class Price extends React.Component {
   constructor() {
     super()
@@ -29,17 +38,30 @@ class Price extends React.Component {
       lastUpdated: "never",
       expletive: randomExpletive(),
     }
+
+    this.currencySelected = this.currencySelected.bind(this)
   }
 
   currencySelected(event) {
-    console.log(event.target.value)
+    const key = `btc_to_${event.target.value.toLowerCase()}`
+
+    axios.get(cloudFunctionURL).then(response => {
+      const value = toPrice(parseFloat(response.data[key]))
+      const date = new Date().toString()
+
+      this.setState({
+        price: value,
+        lastUpdated: date,
+        expletive: randomExpletive(),
+      })
+    })
   }
 
   render() {
     return (
       <PriceWrapper>
         <div>{this.state.expletive}</div>
-        <CountrySelect onChange={this.currencySelected} />
+        <CurrencySelect onChange={this.currencySelected} />
         <span>{this.state.price}</span>
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
       </PriceWrapper>
