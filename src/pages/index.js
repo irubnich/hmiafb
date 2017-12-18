@@ -1,6 +1,7 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import styled from 'styled-components';
+
+import Price from '../components/price'
 
 const Wrapper = styled.div`
   margin-top: 100px;
@@ -11,15 +12,6 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   font-size: 60px;
-`
-
-const Price = styled.div`
-  margin-top: 40px;
-`
-
-const LastUpdated = styled.div`
-  margin-top: 6px;
-  font-size: 10px;
 `
 
 const BuyLink = styled.div`
@@ -37,13 +29,7 @@ const Donate = styled.div`
 const IndexPage = () => (
   <Wrapper>
     <Title>WHAT'S THE FUCKING<br />PRICE OF BITCOIN?</Title>
-    <Price>
-      <span id="expletive">WAIT...</span>
-      <br />
-      <select></select>
-      <span id="the-price"></span>
-    </Price>
-    <LastUpdated>Last updated: <span></span></LastUpdated>
+    <Price />
 
     <BuyLink>
       <a href="https://www.coinbase.com/join/irubnich">GO BUY SOME</a>
