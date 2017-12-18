@@ -4,7 +4,6 @@ import axios from 'axios'
 import Helmet from 'react-helmet'
 
 import { toPrice, randomElement } from '../utils'
-
 import CurrencySelect from '../components/currency_select'
 
 const PriceWrapper = styled.div`
@@ -72,7 +71,7 @@ class Price extends React.Component {
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
 
         <Helmet
-          title={`${this.state.price} ${this.state.currency} | WHAT'S THE FUCKING PRICE OF BITCOIN?`}
+          title={`${this.state.price} ${this.state.currency}`}
         />
       </PriceWrapper>
     )
