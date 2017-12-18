@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
+import Helmet from 'react-helmet'
 
 import { toPrice, randomElement } from '../utils'
 
@@ -29,7 +30,7 @@ class Price extends React.Component {
     super()
 
     this.state = {
-      currency: "usd",
+      currency: "USD",
       price: "HOLD ON",
       lastUpdated: "HAVE SOME DAMN PATIENCE",
       expletive: "WAIT..."
@@ -38,19 +39,19 @@ class Price extends React.Component {
     this.currencyChange = this.currencyChange.bind(this)
 
     // Start off with USD
-    this.updateValue("usd")
+    this.updateValue("USD")
 
     // Polling
     setInterval(() => this.updateValue(this.state.currency), 30000)
   }
 
   currencyChange(event) {
-    const currency = event.target.value.toLowerCase()
+    const currency = event.target.value
     this.updateValue(currency)
   }
 
   updateValue(currency) {
-    const key = `btc_to_${currency}`
+    const key = `btc_to_${currency.toLowerCase()}`
 
     axios.get(CLOUD_FUNCTION_URL).then(response => {
       const value = toPrice(parseFloat(response.data[key]))
@@ -72,6 +73,10 @@ class Price extends React.Component {
         <CurrencySelect onChange={this.currencyChange} />
         <span>{this.state.price}</span>
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
+
+        <Helmet
+          title={`${this.state.price} ${this.state.currency} | WHAT'S THE FUCKING PRICE OF BITCOIN?`}
+        />
       </PriceWrapper>
     )
   }
