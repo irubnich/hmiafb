@@ -47,10 +47,8 @@ class Price extends React.Component {
   }
 
   updateValue(currency) {
-    const key = `btc_to_${currency.toLowerCase()}`
-
     axios.get(CLOUD_FUNCTION_URL).then(response => {
-      const value = toPrice(parseFloat(response.data[key]))
+      const value = toPrice(parseFloat(response.data.data.rates[currency]))
       const date = new Date().toString()
 
       this.setState({
