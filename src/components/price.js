@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 
+import { toPrice, randomElement } from '../utils'
+
 import CurrencySelect from '../components/currency_select'
 
 const PriceWrapper = styled.div`
@@ -13,46 +15,46 @@ const LastUpdated = styled.div`
   font-size: 10px;
 `
 
-const expletives = [
+const EXPLETIVES = [
   "GODDAMN SON IT'S FUCKING",
   "HOLY SHIT IT'S FUCKING",
   "SWEET JESUS IT'S FUCKING",
   "GET THE FUCK OUT OF HERE IT'S",
 ]
 
-const randomExpletive = () => expletives[Math.floor(Math.random() * expletives.length)]
-
-const cloudFunctionURL = "https://us-central1-how-much-is-a-fucking-bitcoin.cloudfunctions.net/getExchangeRates"
-
-const toPrice = (price) => {
-  return price.valueOf().toFixed(2).replace(/./g, (c, i, a) => {
-	   return i && c !== "." && !((a.length - i) % 3) ? "," + c : c;
-   })
-}
+const CLOUD_FUNCTION_URL = "https://us-central1-how-much-is-a-fucking-bitcoin.cloudfunctions.net/getExchangeRates"
 
 class Price extends React.Component {
   constructor() {
     super()
     this.state = {
-      price: 0,
-      lastUpdated: "never",
-      expletive: randomExpletive(),
+      price: "HOLD ON",
+      lastUpdated: "HAVE SOME DAMN PATIENCE",
+      expletive: "WAIT..."
     }
 
-    this.currencySelected = this.currencySelected.bind(this)
+    this.currencyChange = this.currencyChange.bind(this)
+
+    // Start off with USD
+    this.updateValue("usd")
   }
 
-  currencySelected(event) {
-    const key = `btc_to_${event.target.value.toLowerCase()}`
+  currencyChange(event) {
+    const currency = event.target.value.toLowerCase()
+    this.updateValue(currency)
+  }
 
-    axios.get(cloudFunctionURL).then(response => {
+  updateValue(currency) {
+    const key = `btc_to_${currency}`
+
+    axios.get(CLOUD_FUNCTION_URL).then(response => {
       const value = toPrice(parseFloat(response.data[key]))
       const date = new Date().toString()
 
       this.setState({
         price: value,
         lastUpdated: date,
-        expletive: randomExpletive(),
+        expletive: randomElement(EXPLETIVES),
       })
     })
   }
@@ -61,7 +63,7 @@ class Price extends React.Component {
     return (
       <PriceWrapper>
         <div>{this.state.expletive}</div>
-        <CurrencySelect onChange={this.currencySelected} />
+        <CurrencySelect onChange={this.currencyChange} />
         <span>{this.state.price}</span>
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
       </PriceWrapper>
