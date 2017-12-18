@@ -32,10 +32,12 @@ class Price extends React.Component {
       currency: "USD",
       price: "HOLD ON",
       lastUpdated: "HAVE SOME DAMN PATIENCE",
-      expletive: "WAIT..."
+      expletive: "WAIT...",
     }
+  }
 
-    // Start off with USD
+  componentDidMount() {
+    // Start off with USD 🇺🇸 🦅
     this.updateValue("USD")
 
     // Polling
@@ -49,7 +51,7 @@ class Price extends React.Component {
   updateValue(currency) {
     // This function call implies activity so send a GA event to track it
     // The `if` is necessary to avoid an "undefined" error at build-time
-    if (typeof window !== `undefined`) {
+    if (typeof ga === `function`) {
       ga('send', 'event', 'Home', 'poll');
     }
 
