@@ -7,7 +7,9 @@
     "gatsby": "^1.9.141",
     "gatsby-link": "^1.6.32",
     "gatsby-plugin-google-analytics": "^1.0.14",
-    "gatsby-plugin-react-helmet": "^1.0.8"
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-styled-components": "^2.0.4",
+    "styled-components": "^2.3.0"
   },
   "keywords": [
     "gatsby"
