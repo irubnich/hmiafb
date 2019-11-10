@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { graphql } from 'gatsby'
 
 import Price from '../components/price'
 
@@ -43,3 +44,13 @@ const IndexPage = () => (
 )
 
 export default IndexPage
+
+export const query = graphql`
+  query TitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`

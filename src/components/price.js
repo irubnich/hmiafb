@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
 import Helmet from 'react-helmet'
 
 import { toPrice, randomElement } from '../utils'
@@ -49,13 +48,7 @@ class Price extends React.Component {
   }
 
   updateValue(currency) {
-    // This function call implies activity so send a GA event to track it
-    // The `if` is necessary to avoid an "undefined" error at build-time
-    if (typeof ga === `function`) {
-      ga('send', 'event', 'Home', 'poll');
-    }
-
-    axios.get(CLOUD_FUNCTION_URL).then(response => {
+    fetch(CLOUD_FUNCTION_URL).then(response => {
       const value = toPrice(parseFloat(response.data.data.rates[currency]))
       const date = new Date().toString()
 

@@ -8,4 +8,7 @@ const toPrice = (price) => {
 // Gets a random element from an array
 const randomElement = (array) => array[Math.floor(Math.random() * array.length)]
 
-export default { toPrice, randomElement }
+module.export = {
+  toPrice: toPrice,
+  randomElement: randomElement
+}
