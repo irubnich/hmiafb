@@ -25,6 +25,7 @@ class Price extends React.Component {
     super()
 
     this.state = {
+      currencies: ["USD"],
       currency: "USD",
       price: "HOLD ON",
       lastUpdated: "HAVE SOME DAMN PATIENCE",
@@ -48,10 +49,16 @@ class Price extends React.Component {
     const response = await fetch('/.netlify/functions/get-rates')
 
     const data = await response.json()
+
+    // Load currencies from the Coinbase API but move USD to the first position
+    const currencies = Object.keys(data.data.rates).filter(currency => currency !== "USD")
+    currencies.unshift("USD")
+
     const value = this.toPrice(parseFloat(data.data.rates[currency]))
     const date = new Date().toString()
 
     this.setState({
+      currencies: currencies,
       currency: currency,
       price: value,
       lastUpdated: date,
@@ -75,7 +82,7 @@ class Price extends React.Component {
     return (
       <PriceWrapper>
         <div>{this.state.expletive}</div>
-        <CurrencySelect onChange={this.handleChange.bind(this)} />
+        <CurrencySelect currencies={this.state.currencies} onChange={this.handleChange.bind(this)} />
         <span>{this.state.price}</span>
         <LastUpdated>Last updated: {this.state.lastUpdated}</LastUpdated>
 
