@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet'
 
-import CurrencySelect from '../components/currency_select'
+import CurrencySelect from './currency-select'
 
 import { toPrice, randomElement } from '../utils'
 

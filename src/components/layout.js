@@ -1,25 +1,14 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { useStaticQuery, graphql } from "gatsby"
 
 export default ({ children }) => {
-  const data = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `
-  )
+  const title = "HOW MUCH IS A FUCKING BITCOIN?"
 
   return (
     <div>
       <Helmet
-        titleTemplate={`%s | ${data.site.siteMetadata.title}`}
-        defaultTitle={data.site.siteMetadata.title}
+        titleTemplate={`%s | ${title}`}
+        defaultTitle={title}
         meta={[
           { name: 'description', content: '' },
           { name: 'keywords', content: '' },

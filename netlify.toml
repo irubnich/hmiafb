@@ -1,4 +1,4 @@
 [build]
-  command = "gatsby build"
-  publish = "public"
+  command = "yarn build"
+  publish = "./build"
   functions = "./functions"
