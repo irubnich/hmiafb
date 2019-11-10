@@ -4,13 +4,14 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "axios": "^0.17.1",
-    "gatsby": "^1.9.141",
-    "gatsby-link": "^1.6.32",
-    "gatsby-plugin-google-analytics": "^1.0.14",
-    "gatsby-plugin-react-helmet": "^1.0.8",
-    "gatsby-plugin-styled-components": "^2.0.4",
-    "styled-components": "^2.3.0"
+    "gatsby": "^2.0.0",
+    "gatsby-plugin-google-analytics": "^2.1.24",
+    "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-styled-components": "^3.1.11",
+    "netlify-lambda": "^1.6.3",
+    "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1",
+    "styled-components": "^4.4.1"
   },
   "keywords": [
     "gatsby"
@@ -21,9 +22,10 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "netlify-lambda install"
   },
   "devDependencies": {
-    "prettier": "^1.9.2"
+    "prettier": "^1.19.1"
   }
 }

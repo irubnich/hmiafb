@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
 import Helmet from 'react-helmet'
 
-import { toPrice, randomElement } from '../utils'
 import CurrencySelect from '../components/currency_select'
 
 const PriceWrapper = styled.div`
@@ -21,8 +19,6 @@ const EXPLETIVES = [
   "SWEET JESUS IT'S FUCKING",
   "GET THE FUCK OUT OF HERE IT'S",
 ]
-
-const CLOUD_FUNCTION_URL = "https://us-central1-how-much-is-a-fucking-bitcoin.cloudfunctions.net/getExchangeRates"
 
 class Price extends React.Component {
   constructor() {
@@ -48,23 +44,30 @@ class Price extends React.Component {
     this.updateValue(event.target.value)
   }
 
-  updateValue(currency) {
-    // This function call implies activity so send a GA event to track it
-    // The `if` is necessary to avoid an "undefined" error at build-time
-    if (typeof ga === `function`) {
-      ga('send', 'event', 'Home', 'poll');
-    }
+  async updateValue(currency) {
+    const response = await fetch('/.netlify/functions/get-rates')
 
-    axios.get(CLOUD_FUNCTION_URL).then(response => {
-      const value = toPrice(parseFloat(response.data.data.rates[currency]))
-      const date = new Date().toString()
+    const data = await response.json()
+    const value = this.toPrice(parseFloat(data.data.rates[currency]))
+    const date = new Date().toString()
 
-      this.setState({
-        currency: currency,
-        price: value,
-        lastUpdated: date,
-        expletive: randomElement(EXPLETIVES),
-      })
+    this.setState({
+      currency: currency,
+      price: value,
+      lastUpdated: date,
+      expletive: this.randomElement(EXPLETIVES),
+    })
+  }
+
+  // Gets a random element from an array
+  randomElement(array) {
+    return array[Math.floor(Math.random() * array.length)]
+  }
+
+  // Converts a float into a "formtted price", e.g "18000.00" => "18,000.00"
+  toPrice(price) {
+    return price.valueOf().toFixed(2).replace(/./g, (c, i, a) => {
+      return i && c !== "." && !((a.length - i) % 3) ? "," + c : c;
     })
   }
 
