@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+import Layout from '../components/layout'
 import Price from '../components/price'
 
 const Wrapper = styled.div`
@@ -27,19 +28,21 @@ const Donate = styled.div`
 `
 
 const IndexPage = () => (
-  <Wrapper>
-    <Title>WHAT'S THE FUCKING<br />PRICE OF BITCOIN?</Title>
+  <Layout>
+    <Wrapper>
+      <Title>WHAT'S THE FUCKING<br />PRICE OF BITCOIN?</Title>
 
-    <Price />
+      <Price />
 
-    <BuyLink>
-      <a href="https://www.coinbase.com/join/irubnich">GO BUY SOME</a>
-    </BuyLink>
+      <BuyLink>
+        <a href="https://www.coinbase.com/join/irubnich">GO BUY SOME</a>
+      </BuyLink>
 
-    <Donate>
-      1Dk8AnCLEPWCAAau8Tyb5BPTPBf9Zx1Yw4 &lt;3
-    </Donate>
-  </Wrapper>
+      <Donate>
+        1Dk8AnCLEPWCAAau8Tyb5BPTPBf9Zx1Yw4 &lt;3
+      </Donate>
+    </Wrapper>
+  </Layout>
 )
 
 export default IndexPage

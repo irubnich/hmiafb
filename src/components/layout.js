@@ -25,7 +25,7 @@ export default ({ children }) => {
           { name: 'keywords', content: '' },
         ]}
       />
-      {children()}
+      {children}
     </div>
   )
 }
