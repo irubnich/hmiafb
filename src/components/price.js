@@ -4,6 +4,8 @@ import Helmet from 'react-helmet'
 
 import CurrencySelect from '../components/currency_select'
 
+import { toPrice, randomElement } from '../utils'
+
 const PriceWrapper = styled.div`
   margin: 40px 0 40px;
 `
@@ -54,7 +56,7 @@ class Price extends React.Component {
     const currencies = Object.keys(data.data.rates).filter(currency => currency !== "USD")
     currencies.unshift("USD")
 
-    const value = this.toPrice(parseFloat(data.data.rates[currency]))
+    const value = toPrice(parseFloat(data.data.rates[currency]))
     const date = new Date().toString()
 
     this.setState({
@@ -62,19 +64,7 @@ class Price extends React.Component {
       currency: currency,
       price: value,
       lastUpdated: date,
-      expletive: this.randomElement(EXPLETIVES),
-    })
-  }
-
-  // Gets a random element from an array
-  randomElement(array) {
-    return array[Math.floor(Math.random() * array.length)]
-  }
-
-  // Converts a float into a "formtted price", e.g "18000.00" => "18,000.00"
-  toPrice(price) {
-    return price.valueOf().toFixed(2).replace(/./g, (c, i, a) => {
-      return i && c !== "." && !((a.length - i) % 3) ? "," + c : c;
+      expletive: randomElement(EXPLETIVES),
     })
   }
 
