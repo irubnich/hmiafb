@@ -1,7 +1,8 @@
 import React from 'react'
+import {ReactNode} from 'react'
 import {Helmet} from 'react-helmet'
 
-export default ({ children }) => {
+export default ({ children }: { children: ReactNode }) => {
   const title = "HOW MUCH IS A FUCKING BITCOIN?"
 
   return (

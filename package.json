@@ -33,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.0.0",
     "@types/styled-components": "^5.1.0",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^7.0.4",
