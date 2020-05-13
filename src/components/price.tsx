@@ -22,9 +22,17 @@ const EXPLETIVES = [
   "GET THE FUCK OUT OF HERE IT'S",
 ]
 
-class Price extends React.Component {
+interface PriceState {
+  currencies: Array<string>;
+  currency: string;
+  price: string;
+  lastUpdated: string;
+  expletive: string;
+}
+
+class Price extends React.Component<{}, PriceState> {
   constructor() {
-    super()
+    super({})
 
     this.state = {
       currencies: ["USD"],
@@ -43,11 +51,11 @@ class Price extends React.Component {
     setInterval(() => this.updateValue(this.state.currency), 30000)
   }
 
-  handleChange(event) {
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     this.updateValue(event.target.value)
   }
 
-  async updateValue(currency) {
+  async updateValue(currency: string) {
     const response = await fetch('/.netlify/functions/get-rates')
 
     const data = await response.json()
