@@ -3,7 +3,12 @@ import styled from 'styled-components'
 
 import arrow from './select-triangle.png'
 
-const StyledSelect = styled.select`
+interface StyledSelectProps {
+  currencies: Array<string>;
+  onChange(event: React.ChangeEvent<HTMLSelectElement>): void;
+};
+
+const StyledSelect = styled.select<StyledSelectProps>`
   position: relative;
   bottom: 8px;
 
@@ -17,9 +22,9 @@ const StyledSelect = styled.select`
   appearance: none;
   background: url(${arrow}) 85% no-repeat;
   background-size: 12px;
-`
+`;
 
-export default ({ currencies, onChange }) => (
+export default ({ currencies, onChange }: StyledSelectProps) => (
   <StyledSelect currencies={currencies} onChange={onChange}>
     {currencies.map((currency, i) => (
       <option key={i}>{currency}</option>

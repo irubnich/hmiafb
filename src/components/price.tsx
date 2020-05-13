@@ -31,8 +31,8 @@ interface PriceState {
 }
 
 class Price extends React.Component<{}, PriceState> {
-  constructor() {
-    super({})
+  constructor(props: {}) {
+    super(props)
 
     this.state = {
       currencies: ["USD"],
@@ -51,7 +51,7 @@ class Price extends React.Component<{}, PriceState> {
     setInterval(() => this.updateValue(this.state.currency), 30000)
   }
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  handleChange(event: React.ChangeEvent<HTMLSelectElement>): void {
     this.updateValue(event.target.value)
   }
 
