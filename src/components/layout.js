@@ -1,5 +1,5 @@
 import React from 'react'
-import Helmet from 'react-helmet'
+import {Helmet} from 'react-helmet'
 
 export default ({ children }) => {
   const title = "HOW MUCH IS A FUCKING BITCOIN?"
